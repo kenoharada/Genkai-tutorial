@@ -3,6 +3,50 @@ Official document: https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/
 
 portal site: https://genkai-portal.hpc.kyushu-u.ac.jp/
 
+## Setup
+### create account and join projects
+2.利用申請ポータル ~ 3.ログインまで  
+https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/
+
+### ssh setup
+```bash
+vim ~/.ssh/config  
+# replace ku*** with your own account id
+```
+```
+Host genkai
+  HostName genkai.hpc.kyushu-u.ac.jp
+  User ku***
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  TCPKeepAlive yes
+  ForwardAgent yes
+```
+
+```bash
+ssh genkai
+# set group id
+GROUP_ID=$(id -ng)
+echo "export GROUP_ID=$GROUP_ID" >> ~/.bashrc
+source ~/.bashrc
+```
+
+## Storage
+https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/storage.html
+```bash
+# ストレージの使用状況
+show_quota
+# home領域
+ls /home/$GROUP_ID/$USER
+# グループ領域(同じグループ内ならユーザー間で触れる)
+ls /home/$GROUP_ID/share
+mkdir /home/$GROUP_ID/share/$USER
+# 高速ストレージ(同じグループ内ならユーザー間で触れる)
+ls /fast/$GROUP_ID
+# 高速ストレージ内に自分のディレクトリを作る
+mkdir /fast/$GROUP_ID/$USER
+```
+
 ## Hardware
 https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/hardware/  
 https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/resource_group.html  
@@ -36,6 +80,7 @@ https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/nodereserve.html
 pjshowrsc --rg
 show_rsc
 ```
+
 ## Environment
 ### Module
 https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/software/module.html  
@@ -75,50 +120,4 @@ pjdel
 # 混雑状況確認
 pjshowrsc --rg
 show_rsc
-```
-
-
-
-## Storage
-https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/storage.html
-```bash
-# ストレージの使用状況
-show_quota
-# home領域
-ls /home/$GROUP_ID/$USER
-# グループ領域(同じグループ内ならユーザー間で触れる)
-ls /home/$GROUP_ID/share
-mkdir /home/$GROUP_ID/share/$USER
-# 高速ストレージ(同じグループ内ならユーザー間で触れる)
-ls /fast/$GROUP_ID
-# 高速ストレージ内に自分のディレクトリを作る
-mkdir /fast/$GROUP_ID/$USER
-```
-
-## Setup
-### create account and join projects
-2.利用申請ポータル ~ 3.ログインまで  
-https://www.cc.kyushu-u.ac.jp/scp/system/Genkai/howto/
-
-### ssh setup
-```bash
-vim ~/.ssh/config  
-# replace ku*** with your own account id
-```
-```
-Host genkai
-  HostName genkai.hpc.kyushu-u.ac.jp
-  User ku***
-  ServerAliveInterval 60
-  ServerAliveCountMax 3
-  TCPKeepAlive yes
-  ForwardAgent yes
-```
-
-```bash
-ssh genkai
-# set group id
-GROUP_ID=$(id -ng)
-echo "export GROUP_ID=$GROUP_ID" >> ~/.bashrc
-source ~/.bashrc
 ```
