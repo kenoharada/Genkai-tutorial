@@ -92,7 +92,7 @@ show_module -k cuda
 
 pjsub --interact -L rscgrp=b-inter,gpu=1,elapse=01:00:00
 python3.11 -m venv /fast/$GROUP_ID/$USER/playground_env
-source /fast/$GROUP_ID/$USER/playground_env/bin/activate
+source /home/$GROUP_ID/$USER/playground_env/bin/activate
 
 module load cuda/12.2.2 cudnn/9.2.0 nccl/2.22.3 gcc/8 ompi-cuda/4.1.6-12.2.2 
 pip install torch torchvision torchaudio
@@ -103,8 +103,8 @@ pjsub test.sh
 
 登録しておく
 ```bash
-echo 'cd /fast/$GROUP_ID/$USER' >> ~/.bashrc
-echo source '/fast/$GROUP_ID/$USER/playground_env/bin/activate' >> ~/.bashrc
+echo 'cd /home/$GROUP_ID/$USER' >> ~/.bashrc
+echo source '/home/$GROUP_ID/$USER/playground_env/bin/activate' >> ~/.bashrc
 echo 'module load cuda/12.2.2 cudnn/9.2.0 nccl/2.22.3 gcc/8 ompi-cuda/4.1.6-12.2.2' >> ~/.bashrc
 ```
 
